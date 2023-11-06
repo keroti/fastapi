@@ -18,6 +18,12 @@ jobs:
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
 
     services:
+      - name: Test Database Connection
+          run: |
+            psql -h localhost -U ${{ secrets.DATABASE_USERNAME }} -d ${{ secrets.DATABASE_NAME }} -p 5432 -c 'SELECT 1;'
+          env:
+            PGPASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+
       postgres:
         image: postgres
         env:
