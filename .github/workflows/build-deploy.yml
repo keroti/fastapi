@@ -48,8 +48,16 @@ jobs:
           pip install httpx
           pytest tests/test_calculations.py
         continue-on-error: true  # Allow the workflow to continue even if this step fails
-      - name: Handle Test Failures
-        if: failure()
-        run: |
-          # Add commands to handle test failures, such as sending notifications or capturing logs
-          echo "Tests failed, take appropriate action"
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{secrets.DOCKER_HUB_USERNAME}}
+          password: ${{secrets.DOCKER_HUB_ACCESSTOKEN}}
+      - name: Build and push Docker image
+        id: docker_build
+        uses: docker/build-push-action@v3
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: ${{secrets.DOCKER_HUB_USERNAME}}/fastapi:latest
