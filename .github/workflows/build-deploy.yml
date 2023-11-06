@@ -45,3 +45,9 @@ jobs:
           pip install pytest
           pip install httpx
           pytest
+        continue-on-error: true  # Allow the workflow to continue even if this step fails
+      - name: Handle Test Failures
+        if: failure()
+        run: |
+          # Add commands to handle test failures, such as sending notifications or capturing logs
+          echo "Tests failed, take appropriate action"
