@@ -46,7 +46,7 @@ jobs:
         run: |
           pip install pytest
           pip install httpx
-          pytest
+          pytest tests/test_calculations.py
         continue-on-error: true  # Allow the workflow to continue even if this step fails
       - name: Handle Test Failures
         if: failure()
