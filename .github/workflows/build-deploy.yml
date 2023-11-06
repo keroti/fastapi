@@ -53,8 +53,3 @@ jobs:
         run: |
           # Add commands to handle test failures, such as sending notifications or capturing logs
           echo "Tests failed, take appropriate action"
-      - name: Test Database Connection
-          run: |
-            psql -h localhost -U ${{ secrets.DATABASE_USERNAME }} -d ${{ secrets.DATABASE_NAME }} -p 5432 -c 'SELECT 1;'
-          env:
-            PGPASSWORD: ${{ secrets.DATABASE_PASSWORD }}
