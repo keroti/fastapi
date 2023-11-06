@@ -7,14 +7,14 @@ jobs:
     environment:
       name: Testing
     env:
-      DATABASE_HOSTNAME: {{ secrets.DATABASE_HOSTNAME }}
-      DATABASE_PORT: {{ secrets.DATABASE_PORT }}
-      DATABASE_PASSWORD: {{ secrets.DATABASE_PASSWORD }}
-      DATABASE_NAME: {{ secrets.DATABASE_NAME }}
-      DATABASE_USERNAME: {{ secrets.DATABASE_USERNAME }}
-      SECRET_KEY: {{ secrets.SECRET_KEY }}
-      ALGORITHM: {{ secrets.ALGORITHM }}
-      ACCESS_TOKEN_EXPIRE_MINUTES: {{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
+      DATABASE_HOSTNAME: {{ Secrets.DATABASE_HOSTNAME }}
+      DATABASE_PORT: {{ Secrets.DATABASE_PORT }}
+      DATABASE_PASSWORD: {{ Secrets.DATABASE_PASSWORD }}
+      DATABASE_NAME: {{ Secrets.DATABASE_NAME }}
+      DATABASE_USERNAME: {{ Secrets.DATABASE_USERNAME }}
+      SECRET_KEY: {{ Secrets.SECRET_KEY }}
+      ALGORITHM: {{ Secrets.ALGORITHM }}
+      ACCESS_TOKEN_EXPIRE_MINUTES: {{ Secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
     runs-on: ubuntu-latest
     steps:
       - name: Pulling git repo
