@@ -3,7 +3,18 @@ name: Build and Deploy Code
 on: [push, pull_request]
 
 jobs:
-  job1: 
+  job1:
+    environment:
+      name: Testing
+    env:
+      DATABASE_HOSTNAME: {{ DATABASE_HOSTNAME }}
+      DATABASE_PORT: {{ DATABASE_PORT }}
+      DATABASE_PASSWORD: {{ DATABASE_PASSWORD }}
+      DATABASE_NAME: {{ DATABASE_NAME }}
+      DATABASE_USERNAME: {{ DATABASE_USERNAME }}
+      SECRET_KEY: {{ SECRET_KEY }}
+      ALGORITHM: {{ ALGORITHM }}
+      ACCESS_TOKEN_EXPIRE_MINUTES: {{ ACCESS_TOKEN_EXPIRE_MINUTES }}
     runs-on: ubuntu-latest
     steps:
       - name: Pulling git repo
