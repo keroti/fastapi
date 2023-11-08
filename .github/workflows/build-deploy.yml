@@ -3,7 +3,7 @@ name: Build and Deploy Code
 on: [push, pull_request]
 
 jobs:
-  job1:
+  build:
     environment:
       name: testing
     
@@ -48,16 +48,26 @@ jobs:
           pip install httpx
           pytest tests/test_calculations.py
         continue-on-error: true  # Allow the workflow to continue even if this step fails
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{secrets.DOCKER_HUB_USERNAME}}
-          password: ${{secrets.DOCKER_HUB_ACCESSTOKEN}}
-      - name: Build and push Docker image
-        id: docker_build
-        uses: docker/build-push-action@v3
-        with:
-          context: ./
-          file: ./Dockerfile
-          push: true
-          tags: ${{secrets.DOCKER_HUB_USERNAME}}/fastapi:latest
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v3
+      #   with:
+      #     username: ${{secrets.DOCKER_HUB_USERNAME}}
+      #     password: ${{secrets.DOCKER_HUB_ACCESSTOKEN}}
+      # - name: Build and push Docker image
+      #   id: docker_build
+      #   uses: docker/build-push-action@v3
+      #   with:
+      #     context: ./
+      #     file: ./Dockerfile
+      #     push: true
+      #     tags: ${{secrets.DOCKER_HUB_USERNAME}}/fastapi:latest
+    
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+
+    steps:
+      - name: Push changes to production and deploying stuff
+        run: |
+          echo "Deploying to production server"
+          echo "Deployed successfully"
