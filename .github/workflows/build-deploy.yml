@@ -74,20 +74,20 @@ jobs:
           echo "Deploying to production server"
           echo "Deployed successfully"
 
-       - name: Install SSH key
-          run: |
-            echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
-            ssh-add ~/.ssh/id_rsa
-          env:
-            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      - name: Install SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-add ~/.ssh/id_rsa
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
-        - name: Deploy to Production
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.PROD_HOST }}
-            username: ${{ secrets.PROD_USERNAME }}
-          script: |
-            cd /app/src
-            git pull origin main
-            sudo systemctl restart api
+      - name: Deploy to Production
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USERNAME }}
+        script: |
+          cd /app/src
+          git pull origin main
+          sudo systemctl restart api
