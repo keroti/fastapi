@@ -25,6 +25,7 @@ app.include_router(user.router)
 app.include_router(auth.router)
 app.include_router(vote.router)
 
+
 @app.get("/")
 def root():
-	return {"message": "Hello Keroti! How are you?\nThis is fun to learn"}
+    return {"message": "Hello Keroti! How are you? Try pushing to ubuntu!"}
