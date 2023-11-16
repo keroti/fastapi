@@ -1,10 +1,12 @@
-FROM python:latest
+FROM python
 
-WORKDIR /usr/src/app
+ENV PYTHONBUFFERED 1
 
-COPY requirements.txt ./
+WORKDIR /app
 
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
 
 COPY . .
 
