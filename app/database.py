@@ -8,8 +8,6 @@ from urllib.parse import quote
 encoded_password = quote(settings.database_password, safe='')
 SQLALCHEMY_DATABASE_URL = f"postgresql://{settings.database_username}:{encoded_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}" # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
 
-print(settings.database_password)
-print(SQLALCHEMY_DATABASE_URL)
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
