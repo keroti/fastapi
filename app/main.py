@@ -26,5 +26,5 @@ app.include_router(vote.router)
 
 
 @app.get("/")
-def root():
-    return {"message": f"Hello {settings.database_username}! How are you?"}
+async def root():
+    return {"message": f"Hello {settings.database_username}! How are you Today?"}

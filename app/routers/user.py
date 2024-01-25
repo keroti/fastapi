@@ -23,7 +23,7 @@ def create_user(user: schemas.CreateUser, db: Session = Depends(get_db)):
     return new_user
 
 @router.get("/", response_model=List[schemas.CreateUser])  # Get all users
-def getPost(db: Session = Depends(get_db)):
+def get_users(db: Session = Depends(get_db)):
     users = db.query(models.User).all()
     return users
 
